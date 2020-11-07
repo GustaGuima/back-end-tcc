@@ -68,7 +68,8 @@ function adicionarExperiencia(userData, req, res) {
     Aluno.update({
         experiencia: userData.experiencia,
         questoes_respondidas: userData.questoes_respondidas += 1,
-        tentativas: userData.tentativas += 1
+        tentativas: userData.tentativas += 1,
+        pontuacao: userData.pontuacao += req.body.pontuacao
     },
     {
         where: {
@@ -87,7 +88,8 @@ function subirNivel(userData, req, res) {
         experiencia: 0,
         nivel: userData.nivel += 1,
         questoes_respondidas: userData.questoes_respondidas += 1,
-        tentativas: userData.tentativas += 1
+        tentativas: userData.tentativas += 1,
+        pontuacao: userData.pontuacao += req.body.pontuacao
     },
     {
         where: {
