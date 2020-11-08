@@ -1,3 +1,4 @@
+const {createServer} = require('http')
 var express = require('express')
 var cors = require('cors')
 var bodyParser = require('body-parser')
@@ -14,10 +15,16 @@ app.use(
 
 var Users = require('./routes/Users')
 var Exercicios = require('./routes/Exercicios')
+const { create } = require('domain')
 
 app.use('/users', Users)
 app.use('/exercicio', Exercicios)
 
-app.listen(port, function() {
+const server = createServer(app)
+
+
+server.listen(port, err => {
+  if(err) throw err
+
   console.log('Server is running on port: ' + port)
 })

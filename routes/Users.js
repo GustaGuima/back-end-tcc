@@ -69,7 +69,8 @@ function adicionarExperiencia(userData, req, res) {
         experiencia: userData.experiencia,
         questoes_respondidas: userData.questoes_respondidas += 1,
         tentativas: userData.tentativas += 1,
-        pontuacao: userData.pontuacao += req.body.pontuacao
+        pontuacao: userData.pontuacao += req.body.pontuacao,
+        respondido: 1
     },
     {
         where: {
@@ -214,7 +215,8 @@ users.get('/alunos/ranking', (req, res) => {
     })
 })
 
-users.get('/findUser', (req, res) => {
+users.get('/encontrarUsuario', (req, res) => {
+    console.log(req.body.email)
     Aluno.findOne({
         where: {
             email: req.body.email
@@ -222,7 +224,7 @@ users.get('/findUser', (req, res) => {
     }).then(aluno => {
         console.log(aluno)
         if (aluno) {
-           return aluno.dataValues
+           return res.json(aluno)
         } else {
             Professor.findOne({
                 where: {
@@ -230,7 +232,7 @@ users.get('/findUser', (req, res) => {
                 }
             }).then(professor => {
                 if (professor) {
-                    professor.dataValues
+                    return res.json(professor)
                 }
             }).catch(err => {
                 res.status(400).json({ error: err })
