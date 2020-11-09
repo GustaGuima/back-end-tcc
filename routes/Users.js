@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 const Aluno = require('../models/Aluno')
+const Exercicio = require('../models/Exercicio')
 const Professor = require('../models/Professor')
 users.use(cors())
 
@@ -69,8 +70,7 @@ function adicionarExperiencia(userData, req, res) {
         experiencia: userData.experiencia,
         questoes_respondidas: userData.questoes_respondidas += 1,
         tentativas: userData.tentativas += 1,
-        pontuacao: userData.pontuacao += req.body.pontuacao,
-        respondido: 1
+        pontuacao: userData.pontuacao += req.body.pontuacao
     },
     {
         where: {
@@ -104,7 +104,7 @@ function subirNivel(userData, req, res) {
     })
 }
 
-function questaoIncorreta(userData, req, res){
+function questaoIncorreta(req, res){
     Aluno.update({
         tentativas: userData.tentativas += 1
     },
@@ -182,10 +182,9 @@ users.put('/experiencia', (req, res) => {
     }).then(aluno => {
         if (aluno) {
             if((aluno.experiencia += req.body.experiencia) >= 100){
-                console.log('SUBIU DE NIVEL PARABENS')
                 subirNivel(aluno, req, res)
             }else {
-                adicionarExperiencia(aluno, req, res)
+                adicionarExperiencia(aluno, req, res)   
             }
         }
     })
@@ -215,7 +214,7 @@ users.get('/alunos/ranking', (req, res) => {
     })
 })
 
-users.get('/encontrarUsuario', (req, res) => {
+users.post('/encontrarUsuario', (req, res) => {
     console.log(req.body.email)
     Aluno.findOne({
         where: {
