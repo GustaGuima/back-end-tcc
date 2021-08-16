@@ -9,7 +9,6 @@ const Exercicio = require('../models/Exercicio')
 exercicios.use(cors())
 
 function exercicioRespondido(exercicio, req, res) {
-    console.log('CHEGOU AQUI')
     Exercicio.update({
         respondido: 1
     },

@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize')
 const db = {}
 
-const sequelize = new Sequelize('logicafacil', 'logicafacil', 'logicafacil123', {
-    host: 'mariadb-8257-0.cloudclusters.net',
-    port: '8257',
+const sequelize = new Sequelize('logicafacil', 'logica-tcc', 'logicafacil123', {
+    host: 'mariadb-35657-0.cloudclusters.net',
+    port: '35657',
     dialect: 'mysql',
     operatorAliases: false,
 })

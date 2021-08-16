@@ -43,8 +43,7 @@ function cadastrarAluno(userData, req, res) {
         where: {
             email: req.body.email
         }
-    })
-        .then(aluno => {
+    }).then(aluno => {
             if (!aluno) {
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     userData.password = hash
@@ -54,7 +53,7 @@ function cadastrarAluno(userData, req, res) {
                         })
                         .catch(err => {
                             res.send('error: ' + err)
-                        })
+                    })
                 })
             } else {
                 res.send({ error: 'Aluno Existente' })
@@ -104,7 +103,7 @@ function subirNivel(userData, req, res) {
     })
 }
 
-function questaoIncorreta(req, res){
+function questaoIncorreta(userData, req, res){
     Aluno.update({
         tentativas: userData.tentativas += 1
     },
@@ -139,7 +138,6 @@ users.post('/register', (req, res) => {
         professor: req.body.professor,
         created: today
     }
-    console.log(userData.professor)
     if (userData.professor == "true") {
         cadastrarProfessor(userData, req, res)
     } else {
@@ -153,7 +151,6 @@ users.post('/login', (req, res) => {
             email: req.body.email
         }
     }).then(aluno => {
-        console.log(aluno)
         if (aluno) {
             logar(req, res, aluno)
         } else {
@@ -164,6 +161,8 @@ users.post('/login', (req, res) => {
             }).then(professor => {
                 if (professor) {
                     logar(req, res, professor)
+                } else {
+                    res.status(400).json({error: "Usuario Inexistente"});
                 }
             }).catch(err => {
                 res.status(400).json({ error: err })
