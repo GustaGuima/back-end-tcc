@@ -16,9 +16,6 @@ function exercicioRespondido(exercicio, req, res) {
         where: {
             id: exercicio.id
         }
-    }
-    ).then(exercicio => {
-        
     }).catch(err => {
         console.log(err)
     })
@@ -56,6 +53,14 @@ exercicios.post('/exercicio', (req, res) => {
         console.log(e)
     })
 
+})
+
+exercicios.get('/exercicios', (req, res) => {
+    Exercicio.findAll().then(exercicios => {
+        if (exercicios) {
+            return res.json(exercicios)
+        }
+    })
 })
 
 

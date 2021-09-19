@@ -30,6 +30,11 @@ module.exports = db.sequelize.define(
             type: Sequelize.BIGINT,
             allowNull: false,
             defaultValue: 0
+        },
+        sequencia_certas: {
+            type: Sequelize.BIGINT,
+            allowNull:false,
+            defaultValue: 0
         }
     },
     {

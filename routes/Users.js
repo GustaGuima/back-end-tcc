@@ -220,7 +220,6 @@ users.post('/encontrarUsuario', (req, res) => {
             email: req.body.email
         }
     }).then(aluno => {
-        console.log(aluno)
         if (aluno) {
            return res.json(aluno)
         } else {

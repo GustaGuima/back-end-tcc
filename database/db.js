@@ -6,7 +6,7 @@ const sequelize = new Sequelize('logicafacil', 'logica-tcc', 'logicafacil123', {
     port: '35657',
     dialect: 'mysql',
     operatorAliases: false,
-})
+}) 
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize
