@@ -18,7 +18,7 @@ module.exports = db.sequelize.define(
             allowNull: false
         },
         enunciado: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
             allowNull: false
         },
         resposta: {
